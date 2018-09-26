@@ -2,12 +2,11 @@ eon-battery-saver
 ======
 eon-battery-saver is written for comma EON, a dashcam dev kit.
 
-basically it checks usb connection/battery %/battery temp every second:
+basically it checks USB connection/battery %/battery temp every second:
 
-* when no usb connection (not receving power from panda), it changes all cpu max scale freq to the lowest available to preserve battery.
+* when no USB connection (not receiving power from panda), it changes all CPUs' max scale freq to the lowest available to preserve battery.
 * when battery % is high and battery temp is high, it stops charging to reduce battery temp.
-* when battery % is low and battery temp is high, it starts charging to keep EON running.
-* turn off a few wifi related configration to preserve battery.
+* turn off a few WIFI related configurations to preserve battery.
 
 Installation
 ======
