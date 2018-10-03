@@ -102,7 +102,7 @@ while [ 1 ]; do
 
   # update timer based on current usb status
   if [ $CURRENT -eq "0" ]; then
-    timer=timer+1
+    ((timer=timer+1))
   else
     timer=0
   fi
