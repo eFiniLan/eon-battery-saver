@@ -8,6 +8,8 @@ basically it checks USB connection/battery %/battery temp every second:
 * when battery % is high and battery temp is high, it stops charging to reduce battery temp.
 * turn off a few WIFI related configurations to preserve battery.
 
+The battery usage with this script is roughly 12% per hour (no upload, running on mobile data).
+
 Installation
 ======
 Place this script in /data/openpilot/ and add this line to launch_openpilot.sh right after ```#!/usr/bin/bash```:

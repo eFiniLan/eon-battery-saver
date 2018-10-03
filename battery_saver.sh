@@ -7,11 +7,13 @@
 # PURPOSE: Reduce battery usage and heat depending on the status of temp + usb status (connect or disconnect)
 #          * when battery capacity is greater than bat_limit, and battery temp is greater than temp_limit, then stop charging
 #          * when phone is not connected to USB, then change CPU max scale freq to minimum.
+#          * when no USB connection for 1.5 hours, execute shut down command to conserve battery.
 
 # default values
 temp_limit=460 # temp limit - 46 degree, match thermald.py
 bat_limit=35 # battery limit (percentage)
 cpu_power_bat_limit=5 # when power reach this number, we turn cpu freq back on
+power_off_timer=5400 # shut down after 1.5 hours of no usb connection, set to -1 to disable this.
 
 # a few system optimisation, may only effect from next reboot
 # Wi-Fi (scanning always available) off
@@ -60,6 +62,8 @@ echo 1 > /sys/class/power_supply/battery/charging_enabled
 
 PREVIOUS=$(cat /sys/class/power_supply/usb/present)
 
+timer=0
+
 # loop every second
 while [ 1 ]; do
   # retrieve values
@@ -95,7 +99,22 @@ while [ 1 ]; do
       PREVIOUS=$(echo $CURRENT)
     fi
   fi
+
+  # update timer based on current usb status
+  if [ $CURRENT -eq "0" ]; then
+    timer=timer+1
+  else
+    timer=0
+  fi
+
+  # if timer is greater than power off timer, set cpu freq back to max and shut down
+  if ([ $power_off_timer -gt "0" ] && [ $timer -gt $power_off_timer ]); then
+    set_cpu_freq 1
+    reboot -p
+  fi
+
   sleep 1
+
 done
 
 
