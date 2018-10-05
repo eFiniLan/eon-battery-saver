@@ -7,7 +7,7 @@ basically it checks USB connection/battery %/battery temp every second:
 * When no USB connection (not receiving power from panda), it changes all CPUs' max scale freq to the lowest available to preserve battery.
 * When battery % is high and battery temp is high, it stops charging to reduce battery temp.
 * Turn off a few WIFI related configurations to preserve battery.
-* Turn off device after idle 1.5 hrs (no USB connection).
+* (OPTIONAL) Turn off device after idle xxx hrs (no USB connection).
 
 The battery usage is roughly 4% per hour (no upload, running on mobile data) with this script and about 10% per hour without it.
 
