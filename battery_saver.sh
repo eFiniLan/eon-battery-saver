@@ -14,6 +14,7 @@ temp_limit=460 # temp limit - 46 degree, match thermald.py
 bat_limit=35 # battery limit (percentage)
 cpu_power_bat_limit=5 # when power reach this number, we turn cpu freq back on
 power_off_timer=5400 # shut down after 1.5 hours of no usb connection, set to -1 to disable this.
+sleep=60 # sleep timer, in seconds
 
 # a few system optimisation, may only effect from next reboot
 # Wi-Fi (scanning always available) off
@@ -113,8 +114,6 @@ while [ 1 ]; do
     reboot -p
   fi
 
-  sleep 1
+  sleep $sleep
 
 done
-
-
