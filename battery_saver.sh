@@ -13,8 +13,8 @@
 temp_limit=460 # temp limit - 46 degree, match thermald.py
 bat_limit=35 # battery limit (percentage)
 cpu_power_bat_limit=5 # when power reach this number, we turn cpu freq back on
-power_off_timer=-1 # shut down after xxx hours of no USB connection, set to -1 to disable this. power_off_timer = 60*60*1.5/$sleep
-sleep=3 # sleep timer, in seconds
+power_off_timer=3 # shut down after xxx hours of no USB connection, set to 0 to disable this.
+sleep=5 # sleep timer, in seconds, how often you would like the script to query the system status.
 
 # a few system optimisation, may only effect from next reboot
 # Wi-Fi (scanning always available) off
@@ -65,6 +65,12 @@ PREVIOUS=$(cat /sys/class/power_supply/usb/present)
 
 timer=0
 
+power_off_at=0
+
+if [ $power_off_timer -gt "0" ]; then
+  ((power_off_at=60*60*power_off_timer/sleep))
+fi
+
 # loop every second
 while [ 1 ]; do
   # retrieve values
@@ -108,8 +114,8 @@ while [ 1 ]; do
     timer=0
   fi
 
-  # if timer is greater than power off timer, set cpu freq back to max and shut down
-  if ([ $power_off_timer -gt "0" ] && [ $timer -gt $power_off_timer ]); then
+  # if timer is greater than power_off_at timer, set cpu freq back to max and then shut down
+  if ([ $power_off_at -gt "0" ] && [ $timer -gt $power_off_at ]); then
     set_cpu_freq 1
     reboot -p
   fi
