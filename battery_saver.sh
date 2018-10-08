@@ -23,6 +23,8 @@ settings put global wifi_scan_always_enabled 0
 settings put global wifi_networks_available_notification_on 0
 # keep wifi on during sleep only when plugged in
 settings put global wifi_sleep_policy 1
+# disable nfc
+LD_LIBRARY_PATH="" svc nfc disable
 
 # function to loop through available CPUs
 # @param $1 set to max when it's 1, set to min when it's 0
