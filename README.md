@@ -9,7 +9,7 @@ basically it checks USB connection/battery %/battery temp every second:
 * Turn off a few WIFI related configurations to preserve battery.
 * Turn off device after idle 3 hrs (no USB connection).
 
-The battery usage is roughly 4% per hour (no upload, running on WIFI) with this script and about 10% per hour without it.
+The battery usage is roughly 3-4% per hour (no upload, running on WIFI) with this script and about 10% per hour without it.
 
 Installation
 ======

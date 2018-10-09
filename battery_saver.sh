@@ -59,6 +59,9 @@ check_n_set_freq() {
   echo $freq > ./$2/cpufreq/scaling_max_freq
 }
 
+set_charging_status() {
+  echo $1 > /sys/class/power_supply/battery/charging_enabled
+}
 
 ####################################
 ######### logic start here #########
@@ -70,12 +73,13 @@ check_n_set_freq() {
 set_cpu_freq 1
 
 # allow charging
-echo 1 > /sys/class/power_supply/battery/charging_enabled
+set_charging_status 1
 
 PREVIOUS=$(cat /sys/class/power_supply/usb/present)
 timer=0
 power_off_at=0
 
+# calculate power_off_at value
 if [ $power_off_timer -gt "0" ]; then
   ((power_off_at=60*60*power_off_timer/sleep))
 fi
@@ -94,9 +98,9 @@ while [ 1 ]; do
     allow_charge=1
   fi
 
-  # set battery charging status
+  # set battery charging status only when it's different then previous.
   if [ $charging_status -ne $allow_charge ]; then
-    echo $allow_charge > /sys/class/power_supply/battery/charging_enabled
+    set_charging_status $allow_charge
   fi
 
   # current usb status
@@ -112,7 +116,7 @@ while [ 1 ]; do
     # if USB status changed, we update CPU frequency accordingly.
     if [ $CURRENT -ne $PREVIOUS ]; then
       set_cpu_freq $CURRENT
-      PREVIOUS=$(echo $CURRENT)
+      PREVIOUS=$CURRENT
     fi
   fi
 
