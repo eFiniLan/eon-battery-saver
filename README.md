@@ -7,9 +7,9 @@ basically it checks USB connection/battery %/battery temp every second:
 * When no USB connection (not receiving power from panda), it changes all CPUs' max scale freq to the lowest available to preserve battery.
 * When battery % is high and battery temp is high, it stops charging to reduce battery temp.
 * Turn off a few WIFI related configurations to preserve battery.
-* (OPTIONAL) Turn off device after idle xxx hrs (no USB connection).
+* Turn off device after idle 3 hrs (no USB connection).
 
-The battery usage is roughly 4% per hour (no upload, running on mobile data) with this script and about 10% per hour without it.
+The battery usage is roughly 4% per hour (no upload, running on WIFI) with this script and about 10% per hour without it.
 
 Installation
 ======
@@ -34,7 +34,7 @@ A: If you like me, suffering from flat battery due to not charging overnight or 
 
 **Q: Why the UI becomes sluggish?**
 
-A: This is due to the CPU max scale frequencies have been reduced to the smallest available, it will be gone once it's connected to USB.
+A: This is due to the CPU max scale frequencies have been reduced to the minimum available, it will be gone once it's connected to a powered USB port.
 
 **Q: Why the battery still reach high temp?**
 
