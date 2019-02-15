@@ -13,10 +13,14 @@ The battery usage is roughly 3-4% per hour (no upload, running on WIFI) with thi
 
 Installation
 ======
-Place this script in /data/openpilot/ and add this line to launch_openpilot.sh right after ```#!/usr/bin/bash```:
+Place this script in:
+```
+/data/data/com.termux/files/
+```
+and add this line to ```/data/data/com.termux/files/continue.sh``` right after ```#!/usr/bin/bash```:
 
 ```
-/system/bin/sh ./battery_saver.sh &
+/system/bin/sh /data/data/com.termux/files/battery_saver.sh &
 ```
 
 Then reboot your EON.
