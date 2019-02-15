@@ -1,3 +1,6 @@
+Most mods are blocked/disabled after openpilot v0.5.7
+======
+
 eon-battery-saver
 ======
 eon-battery-saver is written for comma EON, a dashcam dev kit.
